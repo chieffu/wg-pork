@@ -79,14 +79,14 @@ class GUI:
         keyboard.add_hotkey('f2', self.on_f2)
         keyboard.add_hotkey('f3', self.on_f3)
         self.executor = ThreadPoolExecutor(max_workers=5)
-        self.websocket_server = WebSocketServer(loop=self.loop)
+        self.websocket_server = WebSocketServer(logger=None,loop=self.loop)
         # 启动 WebSocket 服务器
-        self.start_websocket_server()
+        # self.start_websocket_server()
 
     def start_websocket_server(self):
         self.log("WebSocket 没有启动服务")
         #不要开启
-        #self.websocket_task = self.loop.create_task(self.websocket_server.start())
+        self.websocket_task = self.loop.create_task(self.websocket_server.start())
 
     def on_esc(self):
         if self.game is not None:
